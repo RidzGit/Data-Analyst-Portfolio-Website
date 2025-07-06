@@ -42,7 +42,7 @@ You can view the live demo of this portfolio here.
 Contact
 Feel free to reach out for collaborations or opportunities!
 
-Email: pratithipurnitaroy@gmail.com
+Email: 
 
 LinkedIn: Pratithi Purnita Roy
 
