@@ -82,6 +82,81 @@
             width: 1.5em; /* Ensure consistent icon width */
             text-align: center;
         }
+
+        /* Particle Background for Hero Section */
+        .hero-bg-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            /* Using a subtle radial gradient animation for a 'data flow' feel */
+            background: radial-gradient(circle at 10% 20%, rgba(56, 178, 172, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(56, 178, 172, 0.1) 0%, transparent 50%);
+            animation: moveParticles 20s linear infinite alternate;
+        }
+
+        @keyframes moveParticles {
+            0% {
+                background-position: 0% 0%, 100% 100%;
+            }
+            100% {
+                background-position: 100% 100%, 0% 0%;
+            }
+        }
+
+        /* Experience Details Transition */
+        .experience-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+            opacity: 0;
+        }
+        .experience-details.show {
+            max-height: 500px; /* Adjust based on max content height */
+            opacity: 1;
+        }
+
+        /* Animations for Intersection Observer */
+        .animate-fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+        .animate-fade-in.is-visible {
+            opacity: 1;
+        }
+
+        .animate-slide-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-slide-left.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-slide-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-slide-right.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-scale-in.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -118,25 +193,24 @@
     <main class="container mx-auto px-6 py-12">
         
         <!-- About / Hero Section -->
-        <section id="about" class="text-center min-h-[60vh] flex flex-col justify-center items-center">
-            <div class="flex flex-col md:flex-row items-center justify-center md:space-x-8 max-w-4xl mx-auto">
-                <div>
-                    <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-2">Pratithi Purnita Roy</h2>
-                    <p class="text-xl md:text-2xl font-medium teal-accent mb-6">Data Science & Analytics Enthusiast</p>
-                    <p class="max-w-3xl text-gray-600 leading-relaxed mx-auto">
-                        Driven and detail-oriented B.Tech Computer Science student (Class of 2026) with a strong foundation in data science, analytics, artificial intelligence, and machine learning. Adept at utilizing tools such as Python, SQL, Excel, and Power BI to extract meaningful insights and support data-informed decision-making. Demonstrates a consistent ability to approach complex problems with analytical thinking and technical precision. Passionate about contributing to collaborative, innovation-focused environments where data is central to strategy and impact.
-                    </p>
-                </div>
+        <section id="about" class="text-center min-h-[60vh] flex flex-col justify-center items-center relative overflow-hidden rounded-2xl shadow-lg p-8">
+            <div class="hero-bg-particles"></div>
+            <div class="relative z-10">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-2">Pratithi Purnita Roy</h2>
+                <p class="text-xl md:text-2xl font-medium teal-accent mb-6">Data Science & Analytics Enthusiast</p>
+                <p class="max-w-3xl text-gray-600 leading-relaxed mx-auto">
+                    Driven and detail-oriented B.Tech Computer Science student (Class of 2026) with a strong foundation in data science, analytics, artificial intelligence, and machine learning. Adept at utilizing tools such as Python, SQL, Excel, and Power BI to extract meaningful insights and support data-informed decision-making. Demonstrates a consistent ability to approach complex problems with analytical thinking and technical precision. Passionate about contributing to collaborative, innovation-focused environments where data is central to strategy and impact.
+                </p>
             </div>
-            <div class="flex justify-center space-x-4 mt-8">
+            <div class="flex justify-center space-x-4 mt-8 relative z-10">
                 <a href="#contact" class="bg-teal-accent text-white font-bold py-2 px-6 rounded-lg hover:bg-teal-600 transition duration-300">Contact Me</a>
             </div>
         </section>
 
         <!-- Experience Section -->
         <section id="experience" class="py-20">
-            <h2 class="text-3xl font-bold text-center mb-12">Professional Experience</h2>
-            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">Here's a summary of my professional journey so far. I've had the opportunity to work in various roles, gaining hands-on experience and progressing from an intern to a team lead. Click on any role to see more details.</p>
+            <h2 class="text-3xl font-bold text-center mb-12 animate-fade-in">Professional Experience</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12 animate-fade-in">Here's a summary of my professional journey so far. I've had the opportunity to work in various roles, gaining hands-on experience and progressing from an intern to a team lead. Click on any role to see more details.</p>
             <div id="experience-container" class="relative max-w-2xl mx-auto">
                 <!-- Vertical line -->
                 <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gray-300"></div>
@@ -144,9 +218,9 @@
         </section>
 
         <!-- Skills Section -->
-        <section id="skills" class="py-20 bg-white rounded-2xl shadow-lg">
+        <section id="skills" class="py-20 bg-white rounded-2xl shadow-lg animate-fade-in">
              <h2 class="text-3xl font-bold text-center mb-12">Technical Skills</h2>
-             <p class="text-center text-gray-600 max-w-2xl mx-auto mb-16">I have cultivated a diverse skill set spanning programming, data science, and web development. The chart below provides a high-level overview of my core competencies, followed by a detailed breakdown of the specific technologies and tools I'm proficient in.</p>
+             <p class="text-center text-gray-600 max-w-2xl mx-auto mb-16">I have cultivated a diverse skill set spanning programming, data science, and web development. The radar chart below provides a high-level overview of my core competencies, followed by a detailed breakdown of the specific technologies and tools I'm proficient in.</p>
              <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="chart-container">
                     <canvas id="skillsChart"></canvas>
@@ -158,8 +232,8 @@
 
         <!-- Projects Section -->
         <section id="projects" class="py-20">
-            <h2 class="text-3xl font-bold text-center mb-12">Projects Showcase</h2>
-            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">Here is a collection of projects I've worked on, demonstrating my ability to apply theoretical knowledge to practical, real-world challenges. Click on any project card to view more details.</p>
+            <h2 class="text-3xl font-bold text-center mb-12 animate-fade-in">Projects Showcase</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12 animate-fade-in">Here is a collection of projects I've worked on, demonstrating my ability to apply theoretical knowledge to practical, real-world challenges. Click on any project card to view more details.</p>
             <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Projects will be dynamically inserted here -->
             </div>
@@ -173,6 +247,7 @@
                 </button>
                 <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
                 <p id="modal-description" class="text-gray-600 leading-relaxed"></p>
+                <div id="modal-project-specific-content" class="mt-6"></div>
                 <p id="modal-tech" class="mt-4 text-sm font-medium text-gray-500"></p>
             </div>
         </div>
@@ -180,19 +255,19 @@
 
         <!-- Education Section -->
         <section id="education" class="py-20 bg-gray-50 rounded-2xl shadow-inner">
-            <h2 class="text-3xl font-bold text-center mb-12">Education</h2>
+            <h2 class="text-3xl font-bold text-center mb-12 animate-fade-in">Education</h2>
             <div class="max-w-3xl mx-auto space-y-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="bg-white p-6 rounded-lg shadow-md education-item">
                     <h3 class="text-xl font-bold">B.Tech in Computer Science & Engineering</h3>
                     <p class="text-gray-600">IEC College of Engineering and Technology, Greater Noida</p>
                     <p class="text-sm text-gray-500">Expected Graduation: June 2026</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="bg-white p-6 rounded-lg shadow-md education-item">
                     <h3 class="text-xl font-bold">Intermediate</h3>
                     <p class="text-gray-600">Kendriya Vidyalaya No.2 Salt Lake, Kolkata</p>
                     <p class="text-sm text-gray-500">2021 - 2022</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="bg-white p-6 rounded-lg shadow-md education-item">
                     <h3 class="text-xl font-bold">High School</h3>
                     <p class="text-gray-600">Kendriya Vidyalaya No.2 Salt Lake, Kolkata</p>
                     <p class="text-sm text-gray-500">2019 - 2020</p>
@@ -203,7 +278,7 @@
     </main>
     
     <!-- Contact Section -->
-    <footer id="contact" class="bg-gray-800 text-white py-16">
+    <footer id="contact" class="bg-gray-800 text-white py-16 animate-fade-in">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
             <p class="max-w-lg mx-auto mb-8">Excited to bring data-driven insights to impactful projects. Looking forward to contributing to your team.</p>
@@ -269,41 +344,137 @@ document.addEventListener('DOMContentLoaded', function() {
     const skillsData = [
         {
             category: "Data Science & Analytics",
-            skills: ["SQL", "Excel (Advanced, Power Query)", "Power BI", "Data Cleaning", "Data Wrangling", "Data Mining"]
+            skills: ["SQL", "Excel (Advanced, Power Query)", "Power BI", "Data Cleaning", "Data Wrangling", "Data Mining"],
+            proficiency: 5 // Scale of 1-5
         },
         {
             category: "Machine Learning",
-            skills: ["Regression", "Classification", "Clustering", "Naive Bayes"]
+            skills: ["Regression", "Classification", "Clustering", "Naive Bayes"],
+            proficiency: 4
         },
         {
             category: "Programming",
-            skills: ["Python", "C", "Java"]
+            skills: ["Python", "C", "Java"],
+            proficiency: 4
         },
         {
             category: "Web Development",
-            skills: ["HTML", "CSS", "JavaScript"]
+            skills: ["HTML", "CSS", "JavaScript"],
+            proficiency: 3
         }
     ];
     
     const projectsData = [
-        { title: "Spam Email Detection", description: "Developed a spam email detection model using Python and Naive Bayes algorithm, achieving 95% accuracy on a dataset of 10,000 emails.", tech: "Python, Naive Bayes, Scikit-learn" },
-        { title: "Netflix Movie Suggestion Model", description: "Created a content-based movie suggestion model using Python, analyzing over 5,000 movie titles to provide personalized recommendations.", tech: "Python, Pandas, Cosine Similarity" },
-        { title: "Zomato Review Analysis", description: "Performed sentiment analysis and extracted key insights from 10,000+ Zomato restaurant reviews using Python, identifying common customer preferences and pain points.", tech: "Python, NLTK, Sentiment Analysis" },
-        { title: "Unemployment Analysis", description: "Conducted comprehensive data visualization and analysis of national unemployment trends (2010-2023) using Python (Matplotlib, Seaborn), identifying key demographic impacts.", tech: "Python, Matplotlib, Seaborn, Pandas" },
-        { title: "uComfort Website", description: "Designed and developed a responsive e-commerce website prototype using HTML, CSS, and JavaScript, improving user engagement by 15% in testing scenarios.", tech: "HTML, CSS, JavaScript" },
-        { title: "American Express Data Analysis", description: "Performed in-depth data analysis on American Express datasets, identifying key trends and patterns to inform business strategies.", tech: "Python, Pandas, Data Visualization" },
-        { title: "Amazon User Segmentation", description: "Developed a user segmentation model for Amazon customer data using clustering algorithms, enabling targeted marketing campaigns and personalized user experiences.", tech: "Python, Scikit-learn, K-Means Clustering" },
-        { title: "Facebook Ads Analysis", description: "Analyzed Facebook ad campaign data to optimize ad spend and improve campaign performance, identifying key metrics for success and providing actionable insights.", tech: "SQL, Power BI, Marketing Analytics" }
+        { 
+            title: "Spam Email Detection", 
+            description: "Developed a spam email detection model using Python and Naive Bayes algorithm, achieving 95% accuracy on a dataset of 10,000 emails.", 
+            tech: "Python, Naive Bayes, Scikit-learn",
+            chartData: {
+                title: "Model Accuracy & Data Distribution",
+                labels: ['Accuracy', 'Spam Emails', 'Non-Spam Emails'],
+                values: [95, 3000, 7000], // Example data: 95% accuracy, 3000 spam, 7000 not spam out of 10000
+                colors: ['rgba(56, 178, 172, 0.6)', 'rgba(237, 100, 166, 0.6)', 'rgba(66, 153, 225, 0.6)']
+            }
+        },
+        { 
+            title: "Netflix Movie Suggestion Model", 
+            description: "Created a content-based movie suggestion model using Python, analyzing over 5,000 movie titles to provide personalized recommendations.", 
+            tech: "Python, Pandas, Cosine Similarity",
+            chartData: {
+                title: "Recommendation Coverage",
+                labels: ['Movies Analyzed', 'Recommendations Generated'],
+                values: [5000, 4500], // Example data
+                colors: ['rgba(56, 178, 172, 0.6)', 'rgba(66, 153, 225, 0.6)']
+            }
+        },
+        { 
+            title: "Zomato Review Analysis", 
+            description: "Performed sentiment analysis and extracted key insights from 10,000+ Zomato restaurant reviews using Python, identifying common customer preferences and pain points.", 
+            tech: "Python, NLTK, Sentiment Analysis",
+            chartData: {
+                title: "Sentiment Distribution",
+                labels: ['Positive', 'Neutral', 'Negative'],
+                values: [6000, 2500, 1500], // Example data
+                colors: ['rgba(56, 178, 172, 0.6)', 'rgba(255, 206, 86, 0.6)', 'rgba(237, 100, 166, 0.6)']
+            }
+        },
+        { 
+            title: "Unemployment Analysis", 
+            description: "Conducted comprehensive data visualization and analysis of national unemployment trends (2010-2023) using Python (Matplotlib, Seaborn), identifying key demographic impacts.", 
+            tech: "Python, Matplotlib, Seaborn, Pandas",
+            chartData: {
+                title: "Unemployment Trend (Mock Data)",
+                labels: ['2010', '2015', '2020', '2023'],
+                values: [9.6, 5.0, 8.1, 3.7], // Example data: unemployment rates
+                colors: ['rgba(56, 178, 172, 0.6)', 'rgba(66, 153, 225, 0.6)', 'rgba(255, 206, 86, 0.6)', 'rgba(237, 100, 166, 0.6)']
+            }
+        },
+        { 
+            title: "uComfort Website", 
+            description: "Designed and developed a responsive e-commerce website prototype using HTML, CSS, and JavaScript, improving user engagement by 15% in testing scenarios.", 
+            tech: "HTML, CSS, JavaScript",
+            chartData: {
+                title: "User Engagement Improvement",
+                labels: ['Baseline', 'After Redesign'],
+                values: [85, 100], // Example data: percentage engagement
+                colors: ['rgba(255, 206, 86, 0.6)', 'rgba(56, 178, 172, 0.6)']
+            }
+        },
+        { 
+            title: "American Express Data Analysis", 
+            description: "Performed in-depth data analysis on American Express datasets, identifying key trends and patterns to inform business strategies.", 
+            tech: "Python, Pandas, Data Visualization",
+            chartData: {
+                title: "Key Trend Identified (Mock)",
+                labels: ['Trend A', 'Trend B', 'Trend C'],
+                values: [40, 30, 20], // Example data: impact percentage
+                colors: ['rgba(56, 178, 172, 0.6)', 'rgba(66, 153, 225, 0.6)', 'rgba(255, 206, 86, 0.6)']
+            }
+        },
+        { 
+            title: "Amazon User Segmentation", 
+            description: "Developed a user segmentation model for Amazon customer data using clustering algorithms, enabling targeted marketing campaigns and personalized user experiences.", 
+            tech: "Python, Scikit-learn, K-Means Clustering",
+            chartData: {
+                title: "Customer Segments (Mock)",
+                labels: ['Segment 1', 'Segment 2', 'Segment 3', 'Segment 4'],
+                values: [25, 35, 20, 20], // Example data: percentage of users
+                colors: ['rgba(56, 178, 172, 0.6)', 'rgba(66, 153, 225, 0.6)', 'rgba(255, 206, 86, 0.6)', 'rgba(237, 100, 166, 0.6)']
+            }
+        },
+        { 
+            title: "Facebook Ads Analysis", 
+            description: "Analyzed Facebook ad campaign data to optimize ad spend and improve campaign performance, identifying key metrics for success and providing actionable insights.", 
+            tech: "SQL, Power BI, Marketing Analytics",
+            chartData: {
+                title: "Ad Performance Lift (Mock)",
+                labels: ['CTR Increase', 'Conversion Rate Increase'],
+                values: [15, 10], // Example data: percentage increase
+                colors: ['rgba(56, 178, 172, 0.6)', 'rgba(66, 153, 225, 0.6)']
+            }
+        }
     ];
 
     const githubProfileUrl = "https://github.com/RidzGit"; // Updated GitHub URL
+
+    // Intersection Observer for Animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Stop observing once visible
+            }
+        });
+    }, {
+        threshold: 0.1 // Trigger when 10% of the element is visible
+    });
 
     // Populate Experience
     const experienceContainer = document.getElementById('experience-container');
     experienceData.forEach((exp, index) => {
         const isLeft = index % 2 === 0;
         const timelineItem = document.createElement('div');
-        timelineItem.className = `mb-8 flex justify-between items-center w-full ${isLeft ? 'flex-row-reverse' : ''}`;
+        timelineItem.className = `mb-8 flex justify-between items-center w-full ${isLeft ? 'flex-row-reverse' : ''} timeline-item ${isLeft ? 'animate-slide-left' : 'animate-slide-right'}`;
         
         timelineItem.innerHTML = `
             <div class="order-1 w-5/12"></div>
@@ -314,7 +485,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h3 class="font-bold text-gray-800 text-lg">${exp.role}</h3>
                 <p class="text-sm font-medium text-teal-accent mb-2">${exp.company}</p>
                 <p class="text-xs text-gray-500">${exp.date}</p>
-                <div class="experience-details hidden mt-4 text-sm text-gray-600 space-y-2">
+                <div class="experience-details mt-4 text-sm text-gray-600 space-y-2">
                     <ul class="list-disc list-inside">
                         ${exp.details.map(d => `<li>${d}</li>`).join('')}
                     </ul>
@@ -322,13 +493,14 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
         experienceContainer.appendChild(timelineItem);
+        observer.observe(timelineItem); // Observe for animation
     });
 
     experienceContainer.addEventListener('click', (e) => {
         const item = e.target.closest('.cursor-pointer');
         if (item) {
             const details = item.querySelector('.experience-details');
-            details.classList.toggle('hidden');
+            details.classList.toggle('show'); // Use 'show' class for transition
         }
     });
 
@@ -346,18 +518,25 @@ document.addEventListener('DOMContentLoaded', function() {
         skillsListContainer.appendChild(skillCard);
     });
     
-    // Skills Chart
-    const ctx = document.getElementById('skillsChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'doughnut',
+    // Skills Radar Chart
+    const skillCategories = skillsData.map(s => s.category);
+    const proficiencyScores = skillsData.map(s => s.proficiency);
+
+    const ctxSkills = document.getElementById('skillsChart').getContext('2d');
+    new Chart(ctxSkills, {
+        type: 'radar',
         data: {
-            labels: skillsData.map(s => s.category),
+            labels: skillCategories,
             datasets: [{
-                data: skillsData.map(s => s.skills.length),
-                backgroundColor: ['#38B2AC', '#4A5568', '#4299E1', '#A0AEC0'],
-                borderColor: '#F8F7F4',
-                borderWidth: 4,
-                hoverOffset: 10
+                label: 'Proficiency (1-5)',
+                data: proficiencyScores,
+                backgroundColor: 'rgba(56, 178, 172, 0.4)',
+                borderColor: '#38B2AC',
+                borderWidth: 2,
+                pointBackgroundColor: '#38B2AC',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#38B2AC'
             }]
         },
         options: {
@@ -365,30 +544,57 @@ document.addEventListener('DOMContentLoaded', function() {
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    position: 'bottom',
-                    labels: {
-                        font: {
-                            family: 'Inter',
-                            size: 14
-                        },
-                        padding: 20
-                    }
+                    display: false // Hide legend for cleaner look
                 },
                 tooltip: {
                     titleFont: { family: 'Inter', size: 14, weight: 'bold' },
                     bodyFont: { family: 'Inter', size: 12 },
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label + ': ' + context.raw;
+                        }
+                    },
                     padding: 10
                 }
             },
-            cutout: '60%'
+            scales: {
+                r: {
+                    angleLines: {
+                        color: 'rgba(226, 232, 240, 0.5)' // Light gray
+                    },
+                    grid: {
+                        color: 'rgba(226, 232, 240, 0.5)'
+                    },
+                    pointLabels: {
+                        font: {
+                            family: 'Inter',
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        color: '#2D3748'
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 5,
+                    ticks: {
+                        display: true, // Display numerical ticks (1-5)
+                        beginAtZero: true,
+                        min: 0,
+                        max: 5,
+                        stepSize: 1,
+                        color: '#4A5568' // Color for the tick labels
+                    }
+                }
+            }
         }
     });
     
     // Populate Projects
     const projectsGrid = document.getElementById('projects-grid');
+    const modalProjectSpecificContent = document.getElementById('modal-project-specific-content');
+
     projectsData.forEach(project => {
         const projectCard = document.createElement('div');
-        projectCard.className = 'bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer';
+        projectCard.className = 'bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer project-card animate-scale-in';
         projectCard.innerHTML = `
             <div class="p-6">
                 <h3 class="font-bold text-xl mb-2">${project.title}</h3>
@@ -398,19 +604,121 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         projectCard.addEventListener('click', () => openModal(project));
         projectsGrid.appendChild(projectCard);
+        observer.observe(projectCard); // Observe for animation
     });
     
     // Modal Logic
+    let currentProjectChart = null; // To store the Chart.js instance
+
+    // Moved declarations to top of DOMContentLoaded
     const modal = document.getElementById('project-modal');
     const closeModalButton = document.getElementById('close-modal-button');
     const modalTitle = document.getElementById('modal-title');
     const modalDescription = document.getElementById('modal-description');
     const modalTech = document.getElementById('modal-tech');
 
+
     function openModal(project) {
         modalTitle.textContent = project.title;
         modalDescription.textContent = project.description;
         modalTech.textContent = "Tech Stack: " + project.tech;
+        
+        // Clear previous project-specific content and destroy old chart
+        modalProjectSpecificContent.innerHTML = ''; 
+        if (currentProjectChart) {
+            currentProjectChart.destroy();
+            currentProjectChart = null;
+        }
+
+        // Add project-specific content if available
+        if (project.chartData) {
+            const chartDiv = document.createElement('div');
+            chartDiv.className = 'p-4 bg-gray-100 rounded-lg mb-4';
+            chartDiv.innerHTML = `
+                <h4 class="font-semibold text-gray-700 mb-2">${project.chartData.title || 'Project Data Overview'}</h4>
+                <canvas id="projectChart-${project.title.replace(/\s/g, '-')}" width="400" height="200"></canvas>
+                <p class="text-sm text-gray-600 mt-2">This chart provides a quick visual summary of key project metrics.</p>
+            `;
+            modalProjectSpecificContent.appendChild(chartDiv);
+
+            setTimeout(() => { // Ensure canvas is rendered before getting context
+                const ctxProject = document.getElementById(`projectChart-${project.title.replace(/\s/g, '-')}`).getContext('2d');
+                
+                // Determine dynamic stepSize for y-axis
+                const maxVal = Math.max(...project.chartData.values);
+                let stepSize = 1;
+                if (maxVal > 1000) {
+                    stepSize = 1000;
+                } else if (maxVal > 100) {
+                    stepSize = 20;
+                } else if (maxVal > 20) {
+                    stepSize = 5;
+                } else {
+                    stepSize = 1;
+                }
+
+                currentProjectChart = new Chart(ctxProject, {
+                    type: 'bar',
+                    data: {
+                        labels: project.chartData.labels,
+                        datasets: [{
+                            label: project.chartData.title || 'Value',
+                            data: project.chartData.values,
+                            backgroundColor: project.chartData.colors || 'rgba(56, 178, 172, 0.6)',
+                            borderColor: project.chartData.colors.map(color => color.replace('0.6', '1')) || '#38B2AC',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += context.parsed.y;
+                                            // Add specific units if needed, e.g., if (context.label === 'Accuracy') label += '%';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            },
+                            padding: 10
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: '#4A5568',
+                                    stepSize: stepSize, // Apply dynamic step size
+                                    maxTicksLimit: 7 // Limit number of ticks
+                                },
+                                grid: {
+                                    color: 'rgba(226, 232, 240, 0.5)'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#4A5568'
+                                },
+                                grid: {
+                                    color: 'rgba(226, 232, 240, 0.5)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }, 50); // Small delay to ensure canvas is in DOM
+        }
+
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
         setTimeout(() => {
@@ -423,6 +731,11 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
              modal.classList.add('hidden');
              document.body.style.overflow = '';
+             modalProjectSpecificContent.innerHTML = ''; // Clear content when closing
+             if (currentProjectChart) {
+                currentProjectChart.destroy(); // Destroy chart instance
+                currentProjectChart = null;
+            }
         }, 300);
     }
 
@@ -468,9 +781,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Update GitHub links if profile is provided
-    // This part is now handled directly in the HTML for the footer links
-    // The previous dynamic update logic is no longer needed here as the links are static and explicitly set.
+    // Observe sections for fade-in animation
+    observer.observe(document.querySelector('#skills'));
+    observer.observe(document.querySelector('#education'));
+    observer.observe(document.querySelector('#contact'));
+    observer.observe(document.querySelector('#experience h2'));
+    observer.observe(document.querySelector('#experience p'));
+    observer.observe(document.querySelector('#projects h2'));
+    observer.observe(document.querySelector('#projects p'));
+
+    // Observe education items for slide-in
+    document.querySelectorAll('.education-item').forEach(item => {
+        observer.observe(item);
+    });
+
 });
 </script>
 
